@@ -1,37 +1,45 @@
-.navbar-brand{
-    text-decoration: none;
+.navbar-brand {
+  text-decoration: none;
 }
 
-body .headquote{
-    background-color: rgba(45, 190, 216, 0.788);
-    color:rgb(0, 0, 0);
+body .headquote {
+  background-color: #FFDAB9; /* Color melocotón claro */
+  color: #333; /* Color de texto oscuro */
+}
+
+.navbar {
+  background-color: #FFDAB9; /* Color melocotón claro */
+}
+
+.navbar-dark .navbar-toggler-icon {
+  filter: invert(100%);
 }
 
 body .img-carousel {
-    max-width: 800px;
-    max-height: 400px;
-    margin: auto;
-  }
+  max-width: 800px;
+  max-height: 400px;
+  margin: auto;
+}
 
-     .carousel-control-prev-icon, .carousel-control-next-icon {
-     filter: invert(100%);
-  }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
 
-  .card {
-    height: 100%;
-  }
-  
-  .card-img-top {
-    height: 200px;
-    object-fit: cover;
-  }
+.card {
+  height: 100%;
+}
 
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
 /* Estilos generales del footer */
 footer {
   background-color: #333;
   color: #fff;
   padding: 40px 20px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* Estilos del contenedor del footer */
@@ -41,6 +49,8 @@ footer {
   justify-content: space-between;
   margin: 0 auto;
   max-width: 1200px;
+  border-top: 1px solid #fff;
+  padding-top: 40px;
 }
 
 /* Estilos de las columnas del footer */
@@ -51,6 +61,10 @@ footer {
 
 .footer-column h3 {
   margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Estilos de los enlaces del footer */
@@ -58,6 +72,8 @@ footer {
   list-style: none;
   margin: 0;
   padding: 0;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .footer-column li {
@@ -68,6 +84,8 @@ footer {
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease;
+  display: inline-block;
+  padding: 5px 0;
 }
 
 .footer-column a:hover {
@@ -81,18 +99,60 @@ footer {
   height: 250px;
 }
 
-/* Estilos del texto de derechos de autor */
+/* Estilos adicionales */
 .copy {
-  text-align: center;
   margin-top: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 1px;
 }
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .footer-column {
+    flex-basis: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .footer-column h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .footer-column ul {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .copy {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px){
+  .card { grid-template-columns: repeat(3, 1fr);}
+}
+
+/*Fin del*/
 
 #motivational-toast {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 99999;
-  background-color: rgba(0, 123, 255, 0.8);
+  background-color: #2E8B57; /* Color verde oscuro */
   color: #fff;
   padding: 5px 10px;
   font-size: 16px;
@@ -101,6 +161,23 @@ footer {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   opacity: 0.9;
 }
+
+/*@media (max-width: 768px) {
+  .motivational-toast {
+    max-width: 300px;
+  }
+}*/
+
+@keyframes motivational-toast {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.motivational-toast {
+  animation-name: motivational-toast;
+  animation-duration: 1s;
+}
+
 
 .dropdown-menu a:hover {
   background-color: #28cc4b; /* Cambia el color de fondo al pasar el mouse */
@@ -118,4 +195,165 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/*Prueba*/
+
+#menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+}
+
+.login-button {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  background-color: #2E8B57;
+  opacity: 0.9;
+  font-size: 27px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+  z-index: 999;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-button i {
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.login-uni {
+  position: relative;
+  margin-top: 50px;
+}
+
+.login-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-form-container.show {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.5s ease-in-out;
+}
+
+.my-bt {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #000;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.form-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  font-size: 1.1rem;
+  border-radius: 30px;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.5s ease-in-out forwards;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-check-label {
+  font-size: 1.1rem;
+  margin-left: 5px;
+}
+
+.bt-acept {
+  font-size: 1.2rem;
+  border-radius: 20px;
+  padding: 10px 30px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  margin-top: 20px;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.btn:hover {
+  background-color: #218838;
+  cursor: pointer;
+}
+
+.form-text {
+  font-size: 1rem;
+  margin-top: 5px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .login-form-container {
+    max-width: 300px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

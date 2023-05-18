@@ -1,23 +1,47 @@
 <!doctype html>
 <html lang="en">
+  <!-- school-7e29a -->
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sitio web de Fedora Aleman, una escuela de educación básica ubicada en Fuente de Agua Viva">
-    <link rel="icon" href="/favicon/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
     <title>Fedora Aleman</title>
     <link rel="stylesheet" href="/styles/style.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-jVHJ1oFMg4zfp+B0QjUx2yv+bgcZ+oYDibq+Z5ULfjQVd3zQwzDoeCgAHHvmGv8y6UO7q1P6zdhzJNQ5ZJLKVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="/js/main.js"></script>
   </head>
   <body>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyA_nc-o5j7POS-iXA_Pu7aEW6MhBUzgo_g",
+        authDomain: "school2-629e8.firebaseapp.com",
+        projectId: "school2-629e8",
+        storageBucket: "school2-629e8.appspot.com",
+        messagingSenderId: "343355858036",
+        appId: "1:343355858036:web:3cf33b73350af121318521",
+        measurementId: "G-WDV2GHD6E7"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
 
     <div id="spinner-overlay">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-    
     <nav class="navbar navbar-expand-lg navbar-dark bg-success animate__animated animate__fadeIn">
       <div class="container-fluid bg-success ">
         <a class="navbar-brand">Fedora Aleman</a>
@@ -70,8 +94,36 @@
       </div>
     </nav> 
     <header>
-        <marquee class="headquote">¡Aquí están los mejores!</marquee>
+      <marquee class="headquote" >¡Aquí están los mejores!</marquee>
     </header>
+    
+    <div class="login-section login-uni">
+      <button class="login-button" type="button" id="btn-activator">
+        <i class="fas fa-sign-in-alt"></i>
+        <i class='bx bx-edit'></i>
+      </button>
+
+      <div class="login-section">
+        <div class="login-form-container">
+          <button type="button" class="btn-close my-bt" aria-label="Close" onclick="hideLoginForm()"></button>
+          <form>
+            <div class="mb-3">
+              <div class="form-group">
+                <label for="usuario" class="form-label">Correo Electronico</label>
+                <input type="text" class="form-control" id="email" placeholder="Correo Electronico" required>
+                <div id="emailHelp" class="form-text">Esta sección es específicamente para profesores.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" required placeholder="Contraseña">
+            </div>
+            <button type="submit" class="btn btn-outline-success bt-acept">Aceptar</button>
+          </form>
+        </div>
+      </div>
+      
+
     <div class="container position-relative">
       <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
@@ -95,6 +147,7 @@
         </button>
       </div>
     </div> 
+    
     <div class="container mt-5">
       <h2>Últimas noticias</h2>
       <div class="row mt-4">
@@ -131,12 +184,14 @@
       </div>
     </div>
 </section>
+
 <div class="toast position-fixed align-items-center" role="alert" aria-live="assertive" aria-atomic="true" id="motivational-toast">
   <div class="d-flex">
-    <div class="toast-body" id="motivational-message"></div>
+    <div class="toast-body motivational-toast" id="motivational-message"></div>
     <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
 </div>
+
 <footer>
   <div class="footer-container">
     <div class="footer-column">
@@ -157,7 +212,8 @@
     </div>  
   <p class="copy">&copy; Fedora Aleman Fuente De Agua Viva 2022</p>  
 </footer>  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-  </body>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
 </html>
