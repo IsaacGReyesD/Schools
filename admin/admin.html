@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Agregar usuario</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
+    <script src="/js/admin.js"></script>
+  </head>
+  <body>
+    <form>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre"><br>
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido"><br>
+
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo"> <br>
+
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password"><br>
+
+      <label for="rol">Rol:</label>
+      <select id="rol">
+        <option value="estudiante">Estudiante</option>
+        <option value="profesor">Profesor</option>
+        <option value="administrador">Administrador</option>
+      </select><br>
+
+      <button type="button" onclick="agregarUsuario()">Agregar usuario</button>
+    </form>
+  </body>
+</html>

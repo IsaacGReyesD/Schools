@@ -1,4 +1,3 @@
-
 const messages = [
   "El éxito es la suma de pequeños esfuerzos repetidos día tras día.",
   "El fracaso es una oportunidad para empezar de nuevo con más experiencia.",
@@ -37,7 +36,7 @@ function showMotivationalToast() {
   const toast = new bootstrap.Toast(toastEl, {delay: 40000});
   toast.show();
   toastEl.querySelector('.toast-body').classList.add('motivational-toast');
-}
+};
 
 window.addEventListener('load', function() {
   showMotivationalToast();
@@ -72,5 +71,5 @@ document.addEventListener("DOMContentLoaded", function() {
 function hideLoginForm() {
   var loginForm = document.querySelector(".login-form-container");
   loginForm.classList.remove("show");
-}
+};
 
