@@ -9,8 +9,7 @@ const firebaseConfig = {
   };
 
   firebase.initializeApp(firebaseConfig);
-
- document.addEventListener("DOMContentLoaded", function() {
+function initLogin() {
   // Obtener referencias a los elementos HTML
   var emailField = document.getElementById('email');
   var passwordField = document.getElementById('password');
@@ -32,25 +31,27 @@ const firebaseConfig = {
 
         // Obtener la información del usuario desde Firestore
         var db = firebase.firestore();
-        var usuariosRef = db.collection("Usuarios").doc(user.uid);
+        var usuariosRef = db.collection("Usuarios");
 
-        usuariosRef.get().then(function(doc) {
-          if (doc.exists) {
-            var data = doc.data();
-            var rol = data.rol;
+        usuariosRef.where("correo", "==", user.email).get().then(function(querySnapshot) {
+          if (!querySnapshot.empty) {
+            querySnapshot.forEach(function(doc) {
+              var data =doc.data();
+              var rol = data.rol;
 
-            // Redireccionar a la página correspondiente según el rol del usuario
-            if (rol === "estudiante") {
-              window.location.href = "pagina-de-estudiantes.html";
-            } else if (rol === "profesor") {
-              window.location.href = "pagina-de-profesores.html";
-            } else if (rol === "administrador") {
-              window.location.href = "admin/admin.html";
-            } else {
-              console.log("Rol de usuario desconocido");
-            }
+              // Redireccionar a la página correspondiente según el rol del usuario
+              if (rol === "estudiante") {
+                window.location.href = "pagina-de-estudiantes.html";
+              } else if (rol === "profesor") {
+                window.location.href = "pagina-de-profesores.html";
+              } else if (rol === "administrador") {
+                window.location.href = "/templaces/admin-pagina.html";
+              } else {
+                console.log("Rol de usuario desconocido");
+              }
+            });
           } else {
-            console.log("No se encontró ningún usuario con el ID especificado");
+            console.log("No se encontró ningún usuario con el correo especificado");
           }
         }).catch(function(error) {
           console.error("Error al obtener la información del usuario:", error);
@@ -62,4 +63,8 @@ const firebaseConfig = {
         console.error("Ocurrió un error al iniciar sesión:", error);
       });
   });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  initLogin(); // Llama a la función initLogin al cargar la página
 });
