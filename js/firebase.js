@@ -8,63 +8,38 @@ const firebaseConfig = {
     measurementId: "G-F0FP4LKSSS"
   };
 
-  firebase.initializeApp(firebaseConfig);
-function initLogin() {
-  // Obtener referencias a los elementos HTML
-  var emailField = document.getElementById('email');
-  var passwordField = document.getElementById('password');
-  var loginForm = document.querySelector('.login-form-container form');
-
-  // Manejar el inicio de sesión con Firebase
-  loginForm.addEventListener('submit', function(event) {
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+const loginForm = document.querySelector('#login-form');
+loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    var email = emailField.value;
-    var password = passwordField.value;
-
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(function(userCredential) {
-        // Inicio de sesión exitoso, hacer algo aquí
-        console.log("Inicio de sesión exitoso!");
-
-        // Obtener el usuario autenticado
-        var user = userCredential.user;
-
-        // Obtener la información del usuario desde Firestore
-        var db = firebase.firestore();
-        var usuariosRef = db.collection("Usuarios");
-
-        usuariosRef.where("correo", "==", user.email).get().then(function(querySnapshot) {
-          if (!querySnapshot.empty) {
-            querySnapshot.forEach(function(doc) {
-              var data =doc.data();
-              var rol = data.rol;
-
-              // Redireccionar a la página correspondiente según el rol del usuario
-              if (rol === "estudiante") {
-                window.location.href = "pagina-de-estudiantes.html";
-              } else if (rol === "profesor") {
-                window.location.href = "pagina-de-profesores.html";
-              } else if (rol === "administrador") {
-                window.location.href = "/templaces/admin-pagina.html";
-              } else {
-                console.log("Rol de usuario desconocido");
-              }
-            });
-          } else {
-            console.log("No se encontró ningún usuario con el correo especificado");
-          }
-        }).catch(function(error) {
-          console.error("Error al obtener la información del usuario:", error);
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const uid = userCredential.user.uid;
+            db.collection('usuarios').doc(uid).get()
+                .then((doc) => {
+                    const data = doc.data();
+                    if (data.rol === 'estudiante') {
+                        // Redirigir al usuario a la página de administrador
+                        window.location.href = 'ruta/a/pagina/de/administrador';
+                    } else if (data.rol === 'profesor') {
+                        // Redirigir al usuario a la página de profesor
+                        window.location.href = 'ruta/a/pagina/de/profesor';
+                    } else if (data.rol === 'administrador') {
+                        // Redirigir al usuario a la página de estudiante
+                        window.location.href = 'ruta/a/pagina/de/estudiante';
+                    }
+                })
+                .catch((error) => {
+                    console.log('Error al obtener el rol del usuario:', error);
+                });
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // Aquí puedes mostrar un mensaje de error al usuario
         });
-
-      })
-      .catch(function(error) {
-        // Ocurrió un error al iniciar sesión, mostrar mensaje de error
-        console.error("Ocurrió un error al iniciar sesión:", error);
-      });
-  });
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  initLogin(); // Llama a la función initLogin al cargar la página
 });

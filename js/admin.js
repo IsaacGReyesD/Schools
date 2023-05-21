@@ -9,31 +9,37 @@ const firebaseConfig = {
       };
 
       firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
 
-function agregarUsuario() {
-  var correo = document.getElementById("correo").value;
-  var password = document.getElementById("password").value;
-  var rol = document.getElementById("rol").value;
+      function agregarUsuario() {
+  // Obtiene los valores de los campos de entrada
+  const nombre = document.getElementById("nombre").value;
+  const apellido = document.getElementById("apellido").value;
+  const correo = document.getElementById("correo").value;
+  const password = document.getElementById("password").value;
+  const rol = document.getElementById("rol").value;
 
+  // Crea una cuenta de usuario en Firebase Authentication
   firebase.auth().createUserWithEmailAndPassword(correo, password)
-    .then(function(userCredential) {
-      var user = userCredential.user;
-      var db = firebase.firestore(); // Inicializa Cloud Firestore
-      var usuariosRef = db.collection("Usuarios");
+    .then((userCredential) => {
+      // Obtiene el ID del usuario recién creado
+      const uid = userCredential.user.uid;
 
-      // Agrega el nuevo usuario a la colección Usuarios con un identificador único generado por Firebase
-      return usuariosRef.add({
-        nombre: user.displayName ? user.displayName.split(" ")[0] : "",
-        apellido: user.displayName ? user.displayName.split(" ")[1] : "",
-        correo: user.email,
-        rol: rol,
-        uid: user.uid
+      // Agrega un documento con la información del usuario a Firestore
+      db.collection("usuarios").doc(uid).set({
+        nombre: nombre,
+        apellido: apellido,
+        correo: correo,
+        rol: rol
+      })
+      .then(() => {
+        console.log("Usuario agregado correctamente");
+      })
+      .catch((error) => {
+        console.error("Error al agregar usuario: ", error);
       });
     })
-    .then(function(docRef) {
-      console.log("Nuevo usuario agregado con ID: ", docRef.id);
-    })
-    .catch(function(error) {
-      alert("Hubo un error al agregar el usuario: " + error.message);
+    .catch((error) => {
+      console.error("Error al crear cuenta de usuario: ", error);
     });
 }
